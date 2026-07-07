@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy birthday!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        h1 { font-size: 48px; margin-bottom: 10px; animation: glow 2s infinite alternate; }
+        .photo-container {
+            width: 320px;
+            height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+        .caption { font-size: 22px; margin-top: 15px; text-align: center; min-height: 70px; }
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        @keyframes glow { from { text-shadow: 0 0 15px #fff; } to { text-shadow: 0 0 40px #ff00ff; } }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+    
+    <h1>🎉 Happy Birthday! 🎂</h1>
+    
+    <div class="photo-container" onclick="nextImage()">
+        <img id="birthdayImage" src="https://picsum.photos/id/1015/600/800" alt="Birthday Memory">
+    </div>
+    
+    <div class="caption" id="caption">Click the photo to see more memories ❤️</div>
+
+    <script>
+        const memories = [
+            { url: "https://picsum.photos/id/1015/600/800", caption: "You looked amazing! ✨" },
+            { url: "https://picsum.photos/id/1027/600/800", caption: "Cake time! The best part 🎂" },
+            { url: "https://picsum.photos/id/1033/600/800", caption: "Smiles that light up the room 😊" },
+            { url: "https://picsum.photos/id/106/600/800",  caption: "Making beautiful memories ❤️" }
+        ];
+        let current = 0;
+
+        function nextImage() {
+            current = (current + 1) % memories.length;
+            const img = document.getElementById('birthdayImage');
+            const cap = document.getElementById('caption');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = memories[current].url;
+                cap.textContent = memories[current].caption;
+                img.style.opacity = 1;
+            }, 400);
+        }
+    </script>
+</body>
+</html>
